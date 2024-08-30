@@ -16,22 +16,15 @@ def GaussElimination(A:np.array,b:np.array):
             for k in range(i,n):
                 A[j][k] -= factor * A[i][k]
             b[j] -= factor * b[i]
-    return A,b
 
-def BackSubstitution(A:np.array,b:np.array):
-    """This function is a simple back substitution function after gauss elimination
-    
-    Keyword arguments:
-    A - np.array(): matrix
-    b - np.array(): vector
-    Return: x -> solution
-    """
-    
-    n = len(A)
     x = np.zeros(n)
     for i in reversed(range(n)):
         s = 0
         for j in range(i+1,n):
             s += A[i][j] * x[j]
         x[i] = (b[i] - s) / A[i][i]
+
     return x
+
+def TDMA():
+    pass
