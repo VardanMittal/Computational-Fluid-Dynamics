@@ -6,7 +6,7 @@ def GaussElimination(A:np.array,b:np.array):
     Keyword arguments:
     A - np.array(): matrix
     b - np.array(): vector
-    Return: A,b
+    Return: solution vector x
     """
     
     n = len(A)
@@ -26,5 +26,25 @@ def GaussElimination(A:np.array,b:np.array):
 
     return x
 
-def TDMA():
-    pass
+def TDMA(d,l,u,b):
+    """Function that solves TDMA
+    
+    Keyword arguments:
+    d - np.array(): diagonal vector
+    b - np.array(): known vector
+    l - np.array(): lower diagonal vector
+    u - np.array(): upper diagonal vector
+    Return: x -> solution vector
+    """
+    n = len(d)
+    for i in range(1, n):
+        factor = l[i-1] / d[i-1]
+        d[i] = d[i] - factor * u[i-1]
+        b[i] = b[i] - factor * b[i-1]
+    x = np.zeros(n)
+    x[-1] = b[-1] / d[-1]
+
+    for i in reversed(range(n-1)):
+        x[i] = (b[i] - u[i] * x[i+1]) / d[i]
+
+    return x
