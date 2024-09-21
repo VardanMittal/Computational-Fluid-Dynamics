@@ -1,41 +1,59 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" version="24.7.14">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" version="24.7.16">
   <diagram name="Page-1" id="6qVybAu3rOkevgf7E7gu">
-    <mxGraphModel dx="1120" dy="472" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="880" dy="506" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="wCxMIQV_NGHNsLSph-jk-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wCxMIQV_NGHNsLSph-jk-1" target="wCxMIQV_NGHNsLSph-jk-2">
+        <mxCell id="gg4TKkI3vmr2n3mTWyEU-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wCxMIQV_NGHNsLSph-jk-1" target="gg4TKkI3vmr2n3mTWyEU-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="wCxMIQV_NGHNsLSph-jk-1" value="Start" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="250" y="30" width="100" height="60" as="geometry" />
+        <mxCell id="wCxMIQV_NGHNsLSph-jk-1" value="Start" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="60" width="100" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="wCxMIQV_NGHNsLSph-jk-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wCxMIQV_NGHNsLSph-jk-2" target="wCxMIQV_NGHNsLSph-jk-5">
+        <mxCell id="gg4TKkI3vmr2n3mTWyEU-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="wCxMIQV_NGHNsLSph-jk-2" target="wCxMIQV_NGHNsLSph-jk-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="wCxMIQV_NGHNsLSph-jk-2" value="Initialize Variables" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="220" y="130" width="160" height="60" as="geometry" />
+        <mxCell id="wCxMIQV_NGHNsLSph-jk-2" value="Initialize Variables" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="630" y="60" width="160" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="wCxMIQV_NGHNsLSph-jk-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wCxMIQV_NGHNsLSph-jk-5" target="wCxMIQV_NGHNsLSph-jk-7">
+        <mxCell id="wCxMIQV_NGHNsLSph-jk-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="wCxMIQV_NGHNsLSph-jk-5" target="wCxMIQV_NGHNsLSph-jk-7" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="wCxMIQV_NGHNsLSph-jk-5" value="Apply Boundary Conditions" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="240" y="270" width="120" height="60" as="geometry" />
+        <mxCell id="wCxMIQV_NGHNsLSph-jk-5" value="Initialize velocity field" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="650" y="190" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="wCxMIQV_NGHNsLSph-jk-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wCxMIQV_NGHNsLSph-jk-7" target="wCxMIQV_NGHNsLSph-jk-9">
+        <mxCell id="wCxMIQV_NGHNsLSph-jk-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="wCxMIQV_NGHNsLSph-jk-7" target="wCxMIQV_NGHNsLSph-jk-9" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="wCxMIQV_NGHNsLSph-jk-7" value="Initialize Velocity Fields" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="240" y="410" width="120" height="60" as="geometry" />
+        <mxCell id="wCxMIQV_NGHNsLSph-jk-7" value="Apply boundary&lt;div&gt;Conditions&lt;/div&gt;" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="190" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="wCxMIQV_NGHNsLSph-jk-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wCxMIQV_NGHNsLSph-jk-9" target="wCxMIQV_NGHNsLSph-jk-15">
+        <mxCell id="gg4TKkI3vmr2n3mTWyEU-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="wCxMIQV_NGHNsLSph-jk-9" target="wCxMIQV_NGHNsLSph-jk-15">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="wCxMIQV_NGHNsLSph-jk-9" value="Iterate until convergence" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="240" y="525" width="120" height="60" as="geometry" />
+        <mxCell id="wCxMIQV_NGHNsLSph-jk-9" value="update u with x momentum&amp;nbsp;&lt;div&gt;equation&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="140" y="180" width="217.5" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="wCxMIQV_NGHNsLSph-jk-15" value="Calculate the spatial derivatives using central differences&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;du/dx = (u[i+1, j] - u[i-1, j]) / (2*dx)&lt;br&gt;&lt;/div&gt;&lt;div&gt;du/dy = (u[i, j+1] - u[i, j-1]) / (2*dy)&lt;br&gt;&lt;/div&gt;&lt;div&gt;d2u/dy2 = (u[i, j+1] - 2*u[i, j] + u[i, j-1]) / (dy^2)&lt;/div&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="130" y="650" width="340" height="95" as="geometry" />
+        <mxCell id="gg4TKkI3vmr2n3mTWyEU-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="wCxMIQV_NGHNsLSph-jk-15" target="gg4TKkI3vmr2n3mTWyEU-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wCxMIQV_NGHNsLSph-jk-15" value="update v using continuity equation" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="138.75" y="370" width="220" height="77.5" as="geometry" />
+        </mxCell>
+        <mxCell id="gg4TKkI3vmr2n3mTWyEU-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gg4TKkI3vmr2n3mTWyEU-5" target="gg4TKkI3vmr2n3mTWyEU-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gg4TKkI3vmr2n3mTWyEU-5" value="Study nature of governing equations" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gg4TKkI3vmr2n3mTWyEU-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="gg4TKkI3vmr2n3mTWyEU-7" target="wCxMIQV_NGHNsLSph-jk-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gg4TKkI3vmr2n3mTWyEU-7" value="Discretize Governing equations for Explicit Scheme" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gg4TKkI3vmr2n3mTWyEU-12" value="stop when marching complete in x" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="478.75" y="374.68" width="151.25" height="68.13" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
