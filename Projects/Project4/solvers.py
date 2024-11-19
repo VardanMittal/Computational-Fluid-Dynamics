@@ -25,7 +25,7 @@ def TDMA(d,l,u,b):
 
 def x_momentum_solver(Nx,Ny,dx,dy, u, v, velocity, p):
     u_star = np.zeros((Nx+1, Ny))
-    du = np.zeros((Nx+1,Ny))
+    du = np.zeros((Nx+1, Ny))
 
     De = dy / dx
     Dw = dy / dx
@@ -33,8 +33,8 @@ def x_momentum_solver(Nx,Ny,dx,dy, u, v, velocity, p):
     Ds = dx / dy
 
     for j in range(1, Ny-1):
-        a = b = c = d = np.zeros(Nx+1)
-        for i in range(1,Nx):
+        a = b = c = d = np.zeros(Nx + 1)
+        for i in range(1,Nx - 1):
             Fe = 0.5 * dy * (u[i + 1, j] + u[i, j])
             Fw = 0.5 * dy * (u[i - 1, j] + u[i, j])
             Fn = 0.5 * dx * (v[i, j + 1] + v[i - 1, j + 1])
@@ -55,9 +55,9 @@ def x_momentum_solver(Nx,Ny,dx,dy, u, v, velocity, p):
 
         u_star[1:-1,j] = TDMA(a[1:-1], b[1:-1], c[1:-1], d[1:-1])
 
-    for i in range(1, Nx):
-        a = b = c = d = np.zeros(Nx+1)
-        for j in range(1, Ny-1):
+    for i in range(1, Nx-1):
+        a = b = c = d = np.zeros(Nx + 1)
+        for j in range(1, Ny - 1):
             Fe = 0.5 *  dy * (u[i + 1, j] + u[i, j])
             Fw = 0.5 *  dy * (u[i - 1, j] + u[i, j])
             Fn = 0.5 *  dx * (v[i, j + 1] + v[i - 1, j + 1])
@@ -75,7 +75,7 @@ def x_momentum_solver(Nx,Ny,dx,dy, u, v, velocity, p):
             b[j] = aP
             c[j] = -aN
             d[j] = (aE * u_star[i + 1, j] + aW * u_star[i - 1, j] + pressure_term) + u_star[i, j]
-        u_star[i, 1:-1] = TDMA(a[1:-1], b[1:-1], c[1:-1], d[1:-1])
+        u_star[i, :-1] = TDMA(a[1:-1], b[1:-1], c[1:-1], d[1:-1])
     u_star[0, :] = -u_star[1, :]  # Left wall
     u_star[-1, :] = -u_star[-2, :]  # Right wall
     u_star[:, 0] = 0.0  # Bottom wall
@@ -84,8 +84,8 @@ def x_momentum_solver(Nx,Ny,dx,dy, u, v, velocity, p):
     return u_star, du
 
 def y_momentum_solver(Nx,Ny,dx,dy, u, v, velocity, p):
-    v_star = np.zeros((Nx, Ny + 1))
-    d_v = np.zeros((Nx, Ny + 1))
+    v_star = np.zeros((Nx, Ny+1))
+    dv = np.zeros((Nx,Ny+1))
 
     De =  dy / dx  # Convective coefficients
     Dw =dy / dx
@@ -95,14 +95,11 @@ def y_momentum_solver(Nx,Ny,dx,dy, u, v, velocity, p):
 
     # ADI Method
     # First pass: y-direction
-    for i in range(1, Nx):
+    for i in range(1, Nx - 1):
         # Thomas algorithm for tridiagonal matrix
-        a = np.zeros(Ny + 1)
-        b = np.zeros(Ny + 1)
-        c = np.zeros(Ny + 1)
-        d = np.zeros(Ny + 1)
+        a = b = c = d = np.zeros(Ny + 1)
 
-        for j in range(1, Ny):
+        for j in range(1, Ny - 1):
             Fe = 0.5 * dy * (u[i + 1, j] + u[i + 1, j - 1])
             Fw = 0.5 * dy * (u[i, j] + u[i, j - 1])
             Fn = 0.5 * dx * (v[i, j + 1] + v[i - 1, j + 1])
@@ -125,13 +122,10 @@ def y_momentum_solver(Nx,Ny,dx,dy, u, v, velocity, p):
         v_star[i, 1:-1] = TDMA(a[1:-1], b[1:-1], c[1:-1], d[1:-1])
 
     # Second pass: x-direction
-    for j in range(1, Ny):
+    for j in range(1, Ny - 1):
         # Thomas algorithm for tridiagonal matrix
-        a = np.zeros(Nx + 1)
-        b = np.zeros(Nx + 1)
-        c = np.zeros(Nx + 1)
-        d = np.zeros(Nx + 1)
-
+        a = b =c = d = np.zeros(Ny + 1)
+ 
         for i in range(1, Nx - 1):
             Fe = 0.5 * dy * (u[i + 1, j] + u[i, j])
             Fw = 0.5 * dy * (u[i - 1, j] + u[i, j])
@@ -152,63 +146,63 @@ def y_momentum_solver(Nx,Ny,dx,dy, u, v, velocity, p):
             d[i] = (aN * v_star[i, j + 1] + aS * v_star[i, j - 1] + pressure_term) + v_star[i, j]
 
         # Solve tridiagonal system
-        v_star[1:-1, j] = TDMA(a[1:-1], b[1:-1], c[1:-1], d[1:-1])
+        v_star[:-1, j] = TDMA(a[1:-1], b[1:-1], c[1:-1], d[1:-1])
 
     # Apply boundary conditions
     v_star[0, :] = 0.0  # Left wall
-    v_star[Nx, :] = 0.0  # Right wall
+    v_star[1, :] = 0.0  # Right wall
     v_star[:, 0] = -v_star[:, 1]  # Bottom wall
     v_star[:, -1] = -v_star[:, -2]  # Top wall
 
-    return v_star, d_v
+    return v_star, dv
 
-import numpy as np
-
-def pressure_correction(Nx, Ny, dx, dy, u_star, v_star, p, max_iter = 100):
-    # Initialize the pressure correction array
+def pressure_correction(Nx, Ny, dx, dy, u_star, v_star, p, max_iter=100):
+    """
+    Pressure correction step using ADI method with TDMA for the lid-driven cavity problem.
+    """
     p_prime = np.zeros((Nx, Ny))
+    b = np.zeros((Nx, Ny))  # Right-hand side array for the Poisson equation
     
-    # Initialize the matrix for storing results
-    A_x = np.zeros((Nx, Ny))
-    A_y = np.zeros((Nx, Ny))
-    
-    # Set up the right-hand side vector for the pressure correction
-    b_x = np.zeros((Nx, Ny))
-    b_y = np.zeros((Nx, Ny))
-    
-    # Precompute the right-hand side based on velocity components
+    # Compute the RHS for the Poisson equation
     for j in range(1, Ny-1):
         for i in range(1, Nx-1):
-            b_x[i, j] = (u_star[i, j] - u_star[i-1, j]) * dy
-            b_y[i, j] = (v_star[i, j] - v_star[i, j-1]) * dx
+            b[i, j] = (u_star[i, j] - u_star[i-1, j]) * dy + (v_star[i, j] - v_star[i, j-1]) * dx
     
-    # Main iteration loop for ADI
     for it in range(max_iter):
-        # Solve in the x-direction (implicit in x)
-        # Build the A_x matrix for the x-direction equation
+        # Step 1: Sweep in the x-direction
         for j in range(1, Ny-1):
+            # Coefficients for the TDMA in x-direction
+            a = np.full(Nx-2, -dy / dx**2)  # Sub-diagonal
+            b_diag = np.full(Nx-2, 2 * (dy / dx**2 + dx / dy**2))  # Main diagonal
+            c = np.full(Nx-2, -dy / dx**2)  # Super-diagonal
+            d = np.zeros(Nx-2)  # RHS
+            
+            # Fill RHS
             for i in range(1, Nx-1):
-                A_x[i, j] = - dy / dx  # Coefficients in the x-direction
-                A_x[i, j] += dy / dx  # Adjust based on the actual discretization
+                d[i-1] = b[i, j] - (dx / dy**2) * (p_prime[i, j-1] + p_prime[i, j+1])
+            
+            # Solve using TDMA
+            p_prime[1:Nx-1, j] = TDMA(a, b_diag, c, d)
         
-        # Solve the system in the x-direction
-        p_prime_x = np.linalg.solve(A_x, b_x.flatten())
-        p_prime[1:Nx-1, 1:Ny-1] = p_prime_x.reshape((Nx-2, Ny-2))
-        
-        # Solve in the y-direction (implicit in y)
+        # Step 2: Sweep in the y-direction
         for i in range(1, Nx-1):
+            # Coefficients for the TDMA in y-direction
+            a = np.full(Ny-2, -dx / dy**2)  # Sub-diagonal
+            b_diag = np.full(Ny-2, 2 * (dy / dx**2 + dx / dy**2))  # Main diagonal
+            c = np.full(Ny-2, -dx / dy**2)  # Super-diagonal
+            d = np.zeros(Ny-2)  # RHS
+            
+            # Fill RHS
             for j in range(1, Ny-1):
-                A_y[i, j] = dx / dy  # Coefficients in the y-direction
-                A_y[i, j] += dx / dy
+                d[j-1] = b[i, j] - (dy / dx**2) * (p_prime[i-1, j] + p_prime[i+1, j])
+            
+            # Solve using TDMA
+            p_prime[i, 1:Ny-1] = TDMA(a, b_diag, c, d)
         
-        # Solve the system in the y-direction
-        p_prime_y = np.linalg.solve(A_y, b_y.flatten())
-        p_prime[1:Nx-1, 1:Ny-1] = p_prime_y.reshape((Nx-2, Ny-2))
-
-        # Update the pressure
+        # Update pressure
         p[1:Nx-1, 1:Ny-1] += p_prime[1:Nx-1, 1:Ny-1]
         
-        # Apply boundary conditions (assuming zero pressure at the boundaries)
+        # Apply boundary conditions (zero pressure at boundaries for simplicity)
         p[0, :] = p[-1, :] = p[:, 0] = p[:, -1] = 0
         
         # Check for convergence
@@ -218,3 +212,34 @@ def pressure_correction(Nx, Ny, dx, dy, u_star, v_star, p, max_iter = 100):
     
     return p, p_prime
 
+
+import numpy as np
+
+def update_velocity(Nx, Ny, u_star, v_star, p_prime, d_u, d_v, velocity):
+
+    v = np.zeros((Nx, Ny + 1))
+    u = np.zeros((Nx + 1, Ny))
+    
+    # Update interior nodes of u
+    for i in range(1, Nx):
+        for j in range(1, Ny - 1):
+            u[i, j] = u_star[i, j] + d_u[i, j] * (p_prime[i - 1, j] - p_prime[i, j])
+    
+    # Update interior nodes of v
+    for i in range(1, Nx - 1):
+        for j in range(1, Ny):
+            v[i, j] = v_star[i, j] + d_v[i, j] * (p_prime[i, j - 1] - p_prime[i, j])
+    
+    # Apply boundary conditions for v
+    v[0, :] = 0.0  # Left wall
+    v[Nx - 1, :] = 0.0  # Right wall
+    v[:, 0] = -v[:, 1]  # Bottom wall
+    v[:, Ny] = -v[:, Ny - 1]  # Top wall
+    
+    # Apply boundary conditions for u
+    u[0, :] = -u[1, :]  # Left wall
+    u[Nx, :] = -u[Nx - 1, :]  # Right wall
+    u[:, 0] = 0.0  # Bottom wall
+    u[:, Ny - 1] = velocity  # Top wall
+    
+    return u, v
